@@ -17,7 +17,7 @@ defmodule BingoWeb.Router do
   scope "/", BingoWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", PlayLive, :play
   end
 
   # Other scopes may use custom stacks.
