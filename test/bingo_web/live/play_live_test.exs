@@ -14,4 +14,14 @@ defmodule BingoWeb.PlayLiveTest do
     assert has_element?(view, "#cell-0-0")
     assert has_element?(view, "#cell-4-4")
   end
+
+  test "can click a cell and toggle its status", %{conn: conn} do
+    {:ok, view, _html} = live(conn, "/")
+
+    assert has_element?(view, "#cell-0-0[data-status=false]")
+
+    view |> element("#cell-0-0") |> render_click()
+
+    assert has_element?(view, "#cell-0-0[data-status=true]")
+  end
 end
