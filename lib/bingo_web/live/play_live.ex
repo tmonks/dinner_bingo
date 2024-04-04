@@ -20,14 +20,14 @@ defmodule BingoWeb.PlayLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <h1>Bingo</h1>
-    <div style="display: flex; flex-direction: column; flex-gap: 1em; width: 600; height: 600">
+    <h1 class="text-3xl text-center mb-2">Dinner Bingo</h1>
+    <div class="flex flex-col gap-1 w-full md:max-w-xl mx-auto">
       <%= for {row, r} <- Enum.with_index(@grid) do %>
-        <div style="display: flex; flex-direction: row; height: 100px">
+        <div class="flex flex-row gap-1 max-h-">
           <%= for {{text, status}, c} <- Enum.with_index(row) do %>
             <div
               id={"cell-#{r}-#{c}"}
-              style="border: 1px solid black; width: 200px; text-align: center;"
+              style="width: 200px; text-align: center;"
               data-status={"#{status}"}
               phx-click="toggle"
               phx-value-row={r}
