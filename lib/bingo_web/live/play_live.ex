@@ -21,23 +21,20 @@ defmodule BingoWeb.PlayLive do
   def render(assigns) do
     ~H"""
     <h1 class="text-3xl text-center mb-2">Dinner Bingo</h1>
-    <div class="flex flex-col gap-1 w-full md:max-w-xl mx-auto">
+    <div class="grid grid-cols-5 gap-1 w-full sm:max-w-xl mx-auto">
       <%= for {row, r} <- Enum.with_index(@grid) do %>
-        <div class="flex flex-row gap-1 max-h-">
-          <%= for {{text, status}, c} <- Enum.with_index(row) do %>
-            <div
-              id={"cell-#{r}-#{c}"}
-              style="width: 200px; text-align: center;"
-              data-status={"#{status}"}
-              phx-click="toggle"
-              phx-value-row={r}
-              phx-value-col={c}
-              class={get_classes_for_status(status)}
-            >
-              <%= text %>
-            </div>
-          <% end %>
-        </div>
+        <%= for {{text, status}, c} <- Enum.with_index(row) do %>
+          <div
+            id={"cell-#{r}-#{c}"}
+            data-status={"#{status}"}
+            phx-click="toggle"
+            phx-value-row={r}
+            phx-value-col={c}
+            class={get_classes_for_status(status) <> " h-28 p-1 flex justify-center items-center text-center text-xs sm:text-sm overflow-hidden"}
+          >
+            <%= text %>
+          </div>
+        <% end %>
       <% end %>
     </div>
     """
