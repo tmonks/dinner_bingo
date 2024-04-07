@@ -8,7 +8,9 @@ defmodule Bingo.Grids do
   """
   def new_grid do
     # get random cells, and create a 5x5 grid
-    get_random_cells()
+    cells()
+    |> shuffle_by_date()
+    |> Enum.take(25)
     |> Enum.chunk_every(5)
     |> Enum.map(fn row ->
       Enum.map(row, fn cell -> {cell, false} end)
@@ -29,15 +31,22 @@ defmodule Bingo.Grids do
     replace_at(grid, row_index, row)
   end
 
+  @doc """
+  Shuffles a list of strings seeded by a date
+  """
+  def shuffle_by_date(list, date \\ Date.utc_today()) do
+    Enum.sort_by(list, &hash_string_with_date(&1, date))
+  end
+
+  defp hash_string_with_date(string, date) do
+    date = Date.to_iso8601(date)
+    # hash the string with the date
+    :erlang.phash2(date <> string)
+  end
+
   defp replace_at(list, index, value) do
     Enum.with_index(list)
     |> Enum.map(fn {el, i} -> if i == index, do: value, else: el end)
-  end
-
-  defp get_random_cells do
-    # return 25 random cells
-    cells()
-    |> Enum.take_random(25)
   end
 
   defp cells do
