@@ -14,7 +14,8 @@ defmodule Bingo.Application do
       # Start a worker by calling: Bingo.Worker.start_link(arg)
       # {Bingo.Worker, arg},
       # Start to serve requests, typically the last entry
-      BingoWeb.Endpoint
+      BingoWeb.Endpoint,
+      {Bingo.GridServer, name: :grid_server}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
