@@ -3,7 +3,7 @@ defmodule BingoWeb.PlayLiveTest do
   import Phoenix.LiveViewTest
 
   test "renders a title", %{conn: conn} do
-    {:ok, view, html} = live(conn, "/")
+    {:ok, _view, html} = live(conn, "/")
 
     assert html =~ "Bingo"
   end
@@ -22,6 +22,18 @@ defmodule BingoWeb.PlayLiveTest do
 
     view |> element("#cell-0-0") |> render_click()
 
+    assert has_element?(view, "#cell-0-0[data-status=true]")
+  end
+
+  test "refreshing the page does not reset the grid", %{conn: conn} do
+    {:ok, view, _html} = live(conn, "/")
+
+    # toggle the first cell
+    view |> element("#cell-0-0") |> render_click()
+    assert has_element?(view, "#cell-0-0[data-status=true]")
+
+    # Refresh the page
+    {:ok, view, _html} = live(conn, "/")
     assert has_element?(view, "#cell-0-0[data-status=true]")
   end
 end

@@ -1,9 +1,11 @@
 defmodule BingoWeb.PlayLive do
   use BingoWeb, :live_view
 
+  alias Bingo.GridServer
+
   @impl true
   def mount(_params, _session, socket) do
-    grid = Bingo.Grids.new_grid()
+    grid = GridServer.get_grid(:grid_server)
     {:ok, assign(socket, grid: grid)}
   end
 
@@ -12,7 +14,8 @@ defmodule BingoWeb.PlayLive do
     row = String.to_integer(row)
     col = String.to_integer(col)
 
-    grid = socket.assigns.grid |> Bingo.Grids.toggle_cell(row, col)
+    # grid = socket.assigns.grid |> Bingo.Grids.toggle_cell(row, col)
+    grid = GridServer.toggle(:grid_server, row, col)
 
     {:noreply, assign(socket, grid: grid)}
   end
