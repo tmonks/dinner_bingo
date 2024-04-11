@@ -52,16 +52,16 @@ defmodule Bingo.Grids do
   defp cells do
     [
       "Learned something interesting",
-      "Had something funny happen to them",
+      "Had something funny happen to you",
       "Did something embarrassing",
-      "made someone laugh",
-      "did something kind for someone",
-      "tried a new food",
-      "got a new idea they're excited about",
-      "had an encounter with an animal",
+      "Made someone laugh",
+      "Did something kind for someone",
+      "Tried a new food",
+      "Got a new idea you're excited about",
+      "Had an encounter with an animal",
       "Solved a problem",
       "Received a compliment",
-      "Helped a friend or colleague",
+      "Helped a friend or co-worker",
       "Learned a new word or phrase",
       "Faced a fear",
       "Noticed something beautiful",
@@ -72,13 +72,12 @@ defmodule Bingo.Grids do
       "Observed an act of kindness",
       "Learned from a mistake",
       "Felt inspired by something or someone",
-      "Saw something new on their way to school/work",
+      "Saw something new on the way to school/work",
       "Tried a new activity",
       "Had a meaningful conversation",
       "Overcame a challenge",
       "Changed an opinion about something",
-      "Found something lost or thought was gone",
-      "Shared a favorite moment of the day"
+      "Found something lost or thought was gone"
     ]
   end
 end
