@@ -33,7 +33,7 @@ defmodule BingoWeb.PlayLive do
             phx-click="toggle"
             phx-value-row={r}
             phx-value-col={c}
-            class={get_classes_for_status(status) <> " h-28 p-1 flex justify-center items-center text-center text-xs sm:text-sm overflow-hidden"}
+            class={get_classes_for_status(status) <> " h-28 p-1 flex justify-center items-center text-center text-xs sm:text-sm overflow-hidden cursor-pointer"}
           >
             <%= text %>
           </div>
@@ -43,6 +43,6 @@ defmodule BingoWeb.PlayLive do
     """
   end
 
-  defp get_classes_for_status(true), do: "bg-red-400"
-  defp get_classes_for_status(_), do: "bg-blue-400"
+  defp get_classes_for_status(true), do: "bg-green-300"
+  defp get_classes_for_status(_), do: "bg-indigo-400"
 end
