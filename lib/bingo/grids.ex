@@ -77,7 +77,18 @@ defmodule Bingo.Grids do
       "Had a meaningful conversation",
       "Overcame a challenge",
       "Changed an opinion about something",
-      "Found something lost or thought was gone"
+      "Found something lost or thought was gone",
+      "Witnessed something unusual or surprising",
+      "Heard a new song that you really liked",
+      "Read something interesting",
+      "Gave someone advice",
+      "Received some good advice",
+      "Received unexpected good news",
+      "Saw an impressive piece of art or creativity",
+      "Adapted to a an unexpected change",
+      "Dreamt something vivid or memorable",
+      "Laughed at a joke or funny situation",
+      "Recognized a personal improvement"
     ]
   end
 end
