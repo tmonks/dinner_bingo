@@ -21,6 +21,12 @@ defmodule BingoWeb.PlayLive do
   end
 
   @impl true
+  def handle_event("new_game", _params, socket) do
+    grid = GridServer.new_grid(:grid_server)
+    {:noreply, assign(socket, grid: grid)}
+  end
+
+  @impl true
   def render(assigns) do
     ~H"""
     <h1 class="text-3xl text-center mb-2">Dinner Bingo</h1>
@@ -39,6 +45,11 @@ defmodule BingoWeb.PlayLive do
           </div>
         <% end %>
       <% end %>
+    </div>
+    <div class="text-center">
+      <button id="new-game" phx-click="new_game" class="bg-blue-500 text-white p-2 mt-4">
+        New Game
+      </button>
     </div>
     """
   end

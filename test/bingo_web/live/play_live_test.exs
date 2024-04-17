@@ -36,4 +36,17 @@ defmodule BingoWeb.PlayLiveTest do
     {:ok, view, _html} = live(conn, "/")
     assert has_element?(view, "#cell-0-0[data-status=true]")
   end
+
+  test "clicking the 'New Game' button resets with a new grid", %{conn: conn} do
+    {:ok, view, _html} = live(conn, "/")
+
+    # toggle the first cell
+    view |> element("#cell-0-0") |> render_click()
+    assert has_element?(view, "#cell-0-0[data-status=true]")
+
+    # Click the 'New Game' button
+    view |> element("#new-game") |> render_click()
+
+    assert has_element?(view, "#cell-0-0[data-status=false]")
+  end
 end
