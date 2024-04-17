@@ -31,6 +31,13 @@ defmodule Bingo.GridServer do
     GenServer.call(server, {:toggle, row, col})
   end
 
+  @doc """
+  Generates and returns a new grid
+  """
+  def new_grid(server) do
+    GenServer.call(server, :new_grid)
+  end
+
   @impl true
   def init(:ok) do
     grid = Grids.new_grid()
@@ -50,6 +57,12 @@ defmodule Bingo.GridServer do
   @impl true
   def handle_call({:toggle, row, col}, _from, grid) do
     grid = Grids.toggle_cell(grid, row, col)
+    {:reply, grid, grid}
+  end
+
+  @impl true
+  def handle_call(:new_grid, _from, _state) do
+    grid = Grids.new_grid()
     {:reply, grid, grid}
   end
 end

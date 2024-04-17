@@ -30,6 +30,13 @@ defmodule Bingo.GridServerTest do
     assert {^cell_text, true} = GridServer.get_grid(server) |> get_cell(0, 0)
   end
 
+  test "can generate a new grid", %{server: server} do
+    grid1 = GridServer.get_grid(server)
+    grid2 = GridServer.new_grid(server)
+
+    assert grid1 != grid2
+  end
+
   defp get_cell(grid, row, col) do
     Enum.at(grid, row) |> Enum.at(col)
   end
