@@ -65,7 +65,7 @@ defmodule Bingo.Grids do
       "Overcame a challenge",
       "Changed an opinion about something",
       "Found something lost or thought was gone",
-      "Witnessed something unusual or surprising",
+      "Saw or heard something weird",
       "Heard a new song that you really liked",
       "Read something interesting",
       "Gave someone advice",
@@ -75,7 +75,13 @@ defmodule Bingo.Grids do
       "Adapted to a an unexpected change",
       "Dreamt something vivid or memorable",
       "Laughed at a joke or funny situation",
-      "Recognized a personal improvement"
+      "Recognized a personal improvement",
+      "Found a new movie or TV show to watch",
+      "Found a new recipe to try",
+      "Did something creative",
+      "Made progress on a big project or goal",
+      "Learned something about a different culture",
+      "Did something to help the environment"
     ]
   end
 end
