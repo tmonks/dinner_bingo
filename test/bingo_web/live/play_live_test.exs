@@ -49,4 +49,12 @@ defmodule BingoWeb.PlayLiveTest do
 
     assert has_element?(view, "#cell-0-0[data-status=false]")
   end
+
+  test "pushes 'store' event when a cell is toggled", %{conn: conn} do
+    {:ok, view, _html} = live(conn, "/")
+
+    view |> element("#cell-0-0") |> render_click()
+
+    assert_push_event(view, "store", %{key: "dinner-bingo"})
+  end
 end

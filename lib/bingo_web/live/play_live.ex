@@ -6,7 +6,11 @@ defmodule BingoWeb.PlayLive do
   @impl true
   def mount(_params, _session, socket) do
     grid = GridServer.get_grid(:grid_server)
-    {:ok, assign(socket, grid: grid)}
+
+    {:ok,
+     socket
+     |> assign(grid: grid)
+     |> assign(storage_key: "dinner-bingo")}
   end
 
   @impl true
@@ -14,10 +18,14 @@ defmodule BingoWeb.PlayLive do
     row = String.to_integer(row)
     col = String.to_integer(col)
 
-    # grid = socket.assigns.grid |> Bingo.Grids.toggle_cell(row, col)
     grid = GridServer.toggle(:grid_server, row, col)
 
-    {:noreply, assign(socket, grid: grid)}
+    state_to_store = "toggled-#{row}-#{col}"
+
+    {:noreply,
+     socket
+     |> assign(grid: grid)
+     |> push_event("store", %{key: socket.assigns.storage_key, data: state_to_store})}
   end
 
   @impl true
@@ -30,7 +38,11 @@ defmodule BingoWeb.PlayLive do
   def render(assigns) do
     ~H"""
     <h1 class="text-3xl text-center mb-2">Dinner Bingo</h1>
-    <div class="grid grid-cols-5 gap-1 w-full sm:max-w-xl mx-auto">
+    <div
+      id="bingo-grid"
+      class="grid grid-cols-5 gap-1 w-full sm:max-w-xl mx-auto"
+      phx-hook="LocalStateStore"
+    >
       <%= for {row, r} <- Enum.with_index(@grid) do %>
         <%= for {{text, status}, c} <- Enum.with_index(row) do %>
           <div
