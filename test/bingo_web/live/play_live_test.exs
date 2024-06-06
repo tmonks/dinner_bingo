@@ -50,10 +50,27 @@ defmodule BingoWeb.PlayLiveTest do
     assert has_element?(view, "#cell-0-0[data-status=false]")
   end
 
+  test "pushes 'restore' event on load", %{conn: conn} do
+    {:ok, view, _html} = live(conn, "/")
+
+    assert_push_event(view, "restore", %{key: "dinner-bingo", event: "restoreSettings"})
+  end
+
   test "pushes 'store' event when a cell is toggled", %{conn: conn} do
     {:ok, view, _html} = live(conn, "/")
 
     view |> element("#cell-0-0") |> render_click()
+
+    assert_push_event(view, "store", %{key: "dinner-bingo", data: grid})
+    # data written is the grid with first cell toggled
+    assert grid |> Enum.at(0) |> Enum.at(0) |> elem(1) == true
+  end
+
+  test "pushes 'store' event when 'New Game' button is clicked", %{conn: conn} do
+    {:ok, view, _html} = live(conn, "/")
+
+    # Click the 'New Game' button
+    view |> element("#new-game") |> render_click()
 
     assert_push_event(view, "store", %{key: "dinner-bingo"})
   end
