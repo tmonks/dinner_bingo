@@ -1,4 +1,4 @@
-// JS Hook for storing some state in sessionStorage in the browser.
+// JS Hook for storing some state in localStorage in the browser.
 // The server requests stored data and clears it when requested.
 export const hooks = {
   mounted() {
@@ -8,15 +8,15 @@ export const hooks = {
   },
 
   store(obj) {
-    sessionStorage.setItem(obj.key, obj.data)
+    localStorage.setItem(obj.key, obj.data)
   },
 
   restore(obj) {
-    var data = sessionStorage.getItem(obj.key)
+    var data = localStorage.getItem(obj.key)
     this.pushEvent(obj.event, data)
   },
 
   clear(obj) {
-    sessionStorage.removeItem(obj.key)
+    localStorage.removeItem(obj.key)
   }
 }

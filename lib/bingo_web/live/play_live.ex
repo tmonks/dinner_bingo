@@ -43,8 +43,6 @@ defmodule BingoWeb.PlayLive do
   @impl true
   # Pushed from JS hook.
   def handle_event("restoreSettings", token_data, socket) when is_binary(token_data) do
-    IO.puts("restoreSettings event received...")
-
     socket =
       case restore_from_token(token_data) do
         {:ok, nil} ->
@@ -64,13 +62,11 @@ defmodule BingoWeb.PlayLive do
   end
 
   def handle_event("restoreSettings", _token_data, socket) do
-    IO.puts("restoreSettings event received with no data :-(")
     socket = get_new_grid(socket)
     {:noreply, socket}
   end
 
   def get_new_grid(socket) do
-    IO.puts("Generating new grid...")
     grid = GridServer.new_grid(:grid_server)
 
     socket
